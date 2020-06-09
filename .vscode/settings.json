@@ -1,0 +1,8 @@
+{
+  "editor.tabSize": 2,
+  "python.formatting.provider": "black",
+  "python.formatting.blackArgs": ["--skip-string-normalization"],
+  "[python]": {
+    "editor.tabSize": 4
+  }
+}
