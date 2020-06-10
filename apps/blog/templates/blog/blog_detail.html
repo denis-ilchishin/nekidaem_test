@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block meta %}
+<title>{% blocktrans with username=object.user.username %}{{ username }}'s blog{% endblocktrans %}</title>
+{% endblock %}
+
+{% block content %}
+<h1>{% blocktrans with username=object.user.username %}{{ username }}'s blog{% endblocktrans %}</h1>
+<hr>
+<h2>
+  {% trans 'Posts:' %}
+</h2>
+<ul>
+  {% for post in blog.posts %}
+  <li>
+    <span>
+      <h3>{{post.title}} </h3>
+      <span>{{post.date_created}}</span>
+    </span>
+    <p>{{post.text}}</p>
+  </li>
+  {% endfor %}
+</ul>
+{% endblock %}

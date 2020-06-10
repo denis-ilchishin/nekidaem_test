@@ -1,14 +1,72 @@
-body{
+* {
+  background-repeat: no-repeat;
+  padding: 0;
+  margin: 0;
+}
+*,
+:after,
+:before {
+  box-sizing: inherit;
+}
+
+hr {
+  margin: 1rem 0;
+}
+
+body {
   margin: 0;
   padding: 0;
   font-size: 14px;
-  font-family: "Roboto","Lucida Grande","DejaVu Sans","Bitstream Vera Sans",Verdana,Arial,sans-serif;
+  font-family: "Roboto", "Lucida Grande", "DejaVu Sans", "Bitstream Vera Sans",
+    Verdana, Arial, sans-serif;
   color: #333;
   background: #fff;
 }
 
-.content{
+h1 {
+  margin-bottom: 1.5rem;
+}
+h2 {
+  margin-bottom: 0.75rem;
+}
+h3 {
+  margin-bottom: 0.5rem;
+}
+
+header,
+main,
+footer {
+  display: flex;
+  flex-direction: column;
+}
+
+header {
+  background-color: cadetblue;
+  flex-direction: row;
+}
+
+ul > li {
+  margin-bottom: 1rem;
+}
+
+ul > li > span {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.container {
   width: 100%;
-  max-width: 900px;
-  padding: 2rem;
+  max-width: 700px;
+  padding: 1rem 2rem;
+  margin: 0 auto;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+}
+
+.blog-list-item-wrapper {
+  padding: 0.5rem 1rem;
 }

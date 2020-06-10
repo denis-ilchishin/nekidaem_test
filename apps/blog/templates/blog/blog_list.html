@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block meta %}
+<title>{% trans "Blogs List" %}</title>
+{% endblock %}
+
+{% block content %}
+<h1>{% trans "Blogs List" %}</h1>
+<hr>
+<ul>
+  {% for blog in object_list %}
+  <li class="blog-list-item-wrapper">
+    <h3>
+      <a href="{% url 'blog-detail' pk=blog.pk %}">
+        {% blocktrans with username=blog.user.username %}{{ username }}'s blog{% endblocktrans %}
+      </a>
+    </h3>
+  </li>
+  {% endfor %}
+</ul>
+{% endblock %}
