@@ -14,15 +14,15 @@ ALLOWED_HOSTS = [env.str('HOST')]
 # Application definition
 
 INSTALLED_APPS = [
+    'apps.core',
+    'apps.users',
+    'apps.blog',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'apps.core',
-    'apps.users',
-    'apps.blog',
 ]
 
 MIDDLEWARE = [
@@ -48,6 +48,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.i18n',
             ],
         },
     },
