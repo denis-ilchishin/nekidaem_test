@@ -48,5 +48,5 @@ def subscriptions_changed(sender, instance, model, pk_set, action, **kwargs):
 m2m_changed.connect(
     subscriptions_changed,
     sender=get_user_model().subscriptions.through,
-    dispatch_uid='subscriptions_changed',
+    dispatch_uid='user.subscriptions.changed',
 )
