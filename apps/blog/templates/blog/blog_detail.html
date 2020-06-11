@@ -12,10 +12,10 @@
   {% trans 'Posts:' %}
 </h2>
 <ul>
-  {% for post in blog.posts %}
+  {% for post in object.posts %}
   <li>
     <span>
-      <h3>{{post.title}} </h3>
+      <h3><a href="{% url 'blog-post-detail' pk=post.pk %}">{{post.title}}</a></h3>
       <span class="date">{{post.date_created}}</span>
     </span>
     <p>{{post.text}}</p>

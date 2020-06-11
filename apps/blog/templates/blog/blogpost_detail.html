@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block meta %}
+<title>{{ object.title }}</title>
+{% endblock %}
+
+{% block content %}
+<a href="{% url 'blog-detail' pk=object.blog.pk %}">{% trans 'Go back to blog' %}</a>
+<h1>{{ object.title }}</h1>
+<span class="date">{{object.date_created}}</span>
+<hr>
+<p>
+  {{object.text}}
+</p>
+{% endblock %}

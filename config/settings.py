@@ -8,6 +8,8 @@ SECRET_KEY = env.str('SECRET_KEY')
 
 DEBUG = env.bool('DEBUG')
 
+URL_FOR_EMAIL = env.str('URL_FOR_EMAIL')
+
 ALLOWED_HOSTS = [env.str('HOST')]
 
 
