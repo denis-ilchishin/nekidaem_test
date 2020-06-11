@@ -35,14 +35,13 @@ class UserFeedSeen(models.Model):
         unique_together = (('user', 'post'),)
 
 
-def subscriptions_changed(sender, instance, model, pk_set, action, **kwargs):
+def subscriptions_changed(instance, pk_set, action, **kwargs):
 
     if action == 'post_remove':
         user = instance
-        blog_class = model
         removed = pk_set
 
-        user.seen.filter(post__blog__in=pk_set).delete()
+        user.seen.filter(post__blog__in=removed).delete()
 
 
 m2m_changed.connect(
