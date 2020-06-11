@@ -27,6 +27,7 @@ class BlogPost(models.Model):
         on_delete=models.CASCADE,
         verbose_name=_('blog'),
         related_query_name='posts',
+        null=False,
     )
     title = models.CharField(_('post title'), max_length=255)
     text = models.TextField(_('post text'))

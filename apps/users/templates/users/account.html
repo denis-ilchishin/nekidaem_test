@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block meta %}
+<title>{% trans "My feed" %}</title>
+{% endblock %}
+
+{% block content %}
+<h1>{% trans "My feed" %}</h1>
+<hr>
+<ul>
+  {% for post in user.get_feed %}
+  <li>
+    <span>
+      <h3>{{post.title}}</h3>
+      <span class="date">{{post.date_created}}</span>
+    </span>
+    <p>{{post.text}}</p>
+  </li>
+  {% endfor %}
+</ul>
+{% endblock %}
