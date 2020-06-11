@@ -33,6 +33,10 @@ h3 {
   margin-bottom: 0.5rem;
 }
 
+span.date {
+  font-size: 12px;
+}
+
 header,
 main,
 footer {
