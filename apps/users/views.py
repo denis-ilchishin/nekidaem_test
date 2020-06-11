@@ -6,7 +6,9 @@ from django.utils.decorators import method_decorator
 from django.views import View
 from django.views.generic import TemplateView
 
-from apps.blog.models import Blog
+from apps.blog.models import Blog, BlogPost
+
+from .models import UserFeedSeen
 
 
 @method_decorator(login_required, name='get')
@@ -30,3 +32,14 @@ class UnsubscribeView(View):
         blog = get_object_or_404(Blog, pk=pk)
         request.user.subscriptions.remove(blog)
         return HttpResponseRedirect(reverse('blog-list'))
+
+
+@method_decorator(login_required, name='post')
+class MarkAsSeen(View):
+    def post(self, request, *args, **kwargs):
+        pk = request.POST.get('pk')
+        blog_post = get_object_or_404(BlogPost, pk=pk)
+        user_feed_seen, new = UserFeedSeen.objects.get_or_create(
+            user=request.user, post=blog_post
+        )
+        return HttpResponseRedirect(reverse('account'))

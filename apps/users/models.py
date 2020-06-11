@@ -1,6 +1,8 @@
 from django.conf import settings
+from django.contrib.auth import get_user_model
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+from django.db.models.signals import m2m_changed
 
 
 class User(AbstractUser):
@@ -11,15 +13,40 @@ class User(AbstractUser):
         blank=True,
     )
 
-    @property
     def get_feed(self):
         from apps.blog.models import BlogPost
 
-        return BlogPost.objects.filter(blog__in=self.subscriptions.all())
+        return BlogPost.objects.filter(blog__in=self.subscriptions.all()).annotate(
+            seen=models.Exists(
+                UserFeedSeen.objects.filter(user=self, post=models.OuterRef('pk')).only(
+                    'pk'
+                )
+            )
+        )
 
 
 class UserFeedSeen(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    post = models.ForeignKey(
-        'blog.BlogPost', on_delete=models.CASCADE, related_name='seen'
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='seen'
     )
+    post = models.ForeignKey('blog.BlogPost', on_delete=models.CASCADE)
+
+    class Meta:
+        unique_together = (('user', 'post'),)
+
+
+def subscriptions_changed(sender, instance, model, pk_set, action, **kwargs):
+
+    if action == 'post_remove':
+        user = instance
+        blog_class = model
+        removed = pk_set
+
+        user.seen.filter(post__blog__in=pk_set).delete()
+
+
+m2m_changed.connect(
+    subscriptions_changed,
+    sender=get_user_model().subscriptions.through,
+    dispatch_uid='subscriptions_changed',
+)
