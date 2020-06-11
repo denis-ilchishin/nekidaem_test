@@ -1,9 +1,11 @@
 from django.urls import include, path
 
-from .views import AccountView, MarkAsSeen, SubscribeView, UnsubscribeView
+from .views import (AccountView, MarkAsSeen, PostCreateView, SubscribeView,
+                    UnsubscribeView)
 
 urlpatterns = [
     path('', AccountView.as_view(), name='account'),
+    path('post-create/', PostCreateView.as_view(), name='post-create'),
     path(
         'api/',
         include(

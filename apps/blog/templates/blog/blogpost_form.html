@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block meta %}
+<title>{% trans "New post" %}</title>
+{% endblock %}
+
+{% block content %}
+<h1>{% trans "New post" %}</h1>
+<hr>
+<form action="{% url 'post-create' %}" method="POST">
+  {%csrf_token%}
+  {{form.as_p}}
+  <button type="submit">{% trans 'Create' %}</button>
+</form>
+
+{% endblock %}
