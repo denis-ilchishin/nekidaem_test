@@ -15,6 +15,22 @@
       <a href="{% url 'blog-detail' pk=blog.pk %}">
         {% blocktrans with username=blog.user.username %}{{ username }}'s blog{% endblocktrans %}
       </a>
+
+      {% if user.is_authenticated and blog.user != user  %}
+      {% if blog not in user.subscriptions.all %}
+      <form action="{% url 'api-subscribe' %}" method="POST" class="subscribe-form">
+        {% csrf_token %}
+        <input type="hidden" name="pk" value="{{ blog.pk }}">
+        <button class="subscribe-button">{% trans 'Subscribe' %}</button>
+      </form>
+      {% else %}
+      <form action="{% url 'api-unsubscribe' %}" method="POST" class="subscribe-form">
+        {% csrf_token %}
+        <input type="hidden" name="pk" value="{{ blog.pk }}">
+        <button class="subscribe-button">{% trans 'Unsubscribe' %}</button>
+      </form>
+      {% endif %}
+      {% endif %}
     </h3>
   </li>
   {% endfor %}

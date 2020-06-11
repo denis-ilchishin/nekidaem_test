@@ -51,6 +51,8 @@ header {
 
 ul > li {
   margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: thin rgba(200, 200, 200, 0.75) solid;
 }
 
 ul > li > span {
@@ -73,4 +75,12 @@ ul > li > span {
 
 .blog-list-item-wrapper {
   padding: 0.5rem 1rem;
+}
+
+.subscribe-button {
+  float: right;
+}
+
+.subscribe-form {
+  display: inline;
 }
