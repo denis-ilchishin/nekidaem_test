@@ -11,3 +11,7 @@
  ```
  sudo docker-compose up
  ```
+### Test data
+- Admin site: http://localhost:8000/admin
+- Admin user's (with access to admin site) credentials: admin/admin 
+- Simple user's credentials: vasiliy/12345
